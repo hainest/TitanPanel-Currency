@@ -137,14 +137,3 @@ function TitanPanelCurrencyButton_Initialize_Array(self)
      CURRENCY_INITIALIZED = true;
      MoneyFrame_Update("TitanPanelCurrencyButton", TitanPanelCurrencyButton_FindGold());
 end
-
-function TitanPanelCurrency_BreakMoney(money)
-     -- Non-negative money only
-     if (money >= 0) then
-          local gold = floor(money / (COPPER_PER_SILVER * SILVER_PER_GOLD));
-          local silver = floor((money - (gold * COPPER_PER_SILVER * SILVER_PER_GOLD)) / COPPER_PER_SILVER);
-          local copper = mod(money, COPPER_PER_SILVER);
-          return gold, silver, copper;
-     end
-end     
-
