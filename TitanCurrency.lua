@@ -26,7 +26,6 @@ local LB = LibStub("AceLocale-3.0"):GetLocale("Titan_Currency", true)
 function TitanPanelCurrencyButton_OnLoad(self)
 	self.registry = {
 		id = TITAN_CURRENCY_ID,
-		-- builtIn = nil,
 		category = "Information",
 		version = TITAN_CURRENCY_VERSION,
 		menuText = LB["TITAN_CURRENCY_MENU_TEXT"],
@@ -46,7 +45,6 @@ function TitanPanelCurrencyButton_OnLoad(self)
 	self:RegisterEvent("VARIABLES_LOADED");
 	self:RegisterEvent("UNIT_NAME_UPDATE");
 	MoneyFrame_Update("TitanPanelCurrencyButton", TitanPanelCurrencyButton_FindGold());
-	-- support for picking up money
 
 	if (not CurrencyArray) then
 		CurrencyArray={};
@@ -95,7 +93,6 @@ function TitanPanelCurrencyButton_GetTooltipText()
 			if icon ~= nil then
 				display=name.."--".."\t"..count.." |T"..icon..":16|t"
 			end
-			-- trace(display)
 			tooltip=strconcat(tooltip,display,"|r\n")
 		end
 		myindex=index
