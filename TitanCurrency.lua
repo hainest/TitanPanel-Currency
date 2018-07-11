@@ -10,30 +10,13 @@
 
 -- ******************************** Constants *******************************
 local TITAN_CURRENCY_ID = "Currency";
-local TITAN_CURRENCY_COUNT_FORMAT = "%d";
 local TITAN_CURRENCY_VERSION = "5.1";
-local TITAN_CURRENCY_SPACERBAR = "--------------------";
-local TITAN_CURRENCY_BLUE = {r=0.4,b=1,g=0.4};
-local TITAN_CURRENCY_RED = {r=1,b=0,g=0};
-local TITAN_CURRENCY_GREEN = {r=0,b=0,g=1};
+
 -- ******************************** Variables *******************************
 local CURRENCY_INITIALIZED = false;
 local CURRENCY_VARIABLES_LOADED = false;
 local CURRENCY_ENTERINGWORLD = false;
-local CURRENCY_INDEX = "";
-local CURRENCY_COLOR;
-local CURRENCY_SESS_STATUS;
-local CURRENCY_PERHOUR_STATUS;
-local CURRENCY_STARTINGGOLD;
-local CURRENCY_SESSIONSTART;
-local REMEMBER_VIEWALL;
-local REMEMBER_SORTBYNAME;
-local REMEMBER_SHOWGPH;
-local L = LibStub("AceLocale-3.0"):GetLocale("Titan", true)
 local LB = LibStub("AceLocale-3.0"):GetLocale("Titan_Currency", true)
-local TitanCurrency = LibStub("AceAddon-3.0"):NewAddon("TitanCurrency", "AceHook-3.0", "AceTimer-3.0")
-local CurrencyTimer = nil;
-local _G = getfenv(0);
 -- ******************************** Functions *******************************
 
 -- **************************************************************************
