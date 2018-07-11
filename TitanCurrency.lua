@@ -45,12 +45,6 @@ function TitanPanelCurrencyButton_OnLoad(self)
 	self:RegisterEvent("VARIABLES_LOADED");
 	self:RegisterEvent("UNIT_NAME_UPDATE");
 	MoneyFrame_Update("TitanPanelCurrencyButton", TitanPanelCurrencyButton_FindGold());
-
-	if (not CurrencyArray) then
-		CurrencyArray={};
-		CurrencyArray["VIEWALL"] = true
-		CurrencyArray["DISPLAYGPH"] = true
-	end
 end
 
 function TitanCurrency_OnEvent(self, event, ...)
@@ -112,14 +106,6 @@ function TitanPanelCurrencyButton_FindGold()
 end
 
 function TitanPanelCurrencyButton_Initialize_Array(self)
-	if (not CurrencyArray["INITIALIZED"]) then
-		CurrencyArray = {};
-		CurrencyArray["INITIALIZED"] = true;
-		CurrencyArray["VIEWALL"] = true;
-		CurrencyArray["DISPLAYGPH"] = true;
-		CurrencyArray["SORTBYNAME"] = true;
-		CurrencyArray["VERSION2"] = true;
-	end
 	CURRENCY_INITIALIZED = true;
 	MoneyFrame_Update("TitanPanelCurrencyButton", TitanPanelCurrencyButton_FindGold());
 end
