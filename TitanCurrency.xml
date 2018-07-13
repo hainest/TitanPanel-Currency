@@ -3,112 +3,15 @@
 	<Script file="TitanCurrency.lua"/>
 	<Frame parent="UIParent">
 		<Frames>
-			<Button name="TitanPanelCurrencyButton" inherits="TitanPanelButtonTemplate" frameStrata="FULLSCREEN" toplevel="true">
-				<Size>
-					<AbsDimension x="128" y="16"/>
-				</Size>
-				<Frames>
-					<Button name="$parentCopperButton" inherits="TitanPanelChildButtonTemplate">
-						<Size>
-							<AbsDimension x="32" y="13"/>
-						</Size>
-						<Anchors>
-							<Anchor point="RIGHT">
-								<Offset>
-									<AbsDimension x="-13" y="1"/>
-								</Offset>
-							</Anchor>
-						</Anchors>
-
-						<NormalTexture file="Interface\MoneyFrame\UI-MoneyIcons">
-							<Size>
-								<AbsDimension x="13" y="13"/>
-							</Size>
-							<Anchors>
-								<Anchor point="RIGHT"/>
-							</Anchors>
-							<TexCoords left="0.5" right="0.75" top="0" bottom="1"/>
-						</NormalTexture>
-						<ButtonText name="$parentText" inherits="GameFontHighlightSmall" justifyH="LEFT">
-							<Anchors>
-								<Anchor point="LEFT"/>
-							</Anchors>
-						</ButtonText>
-						<PushedTextOffset>
-							<AbsDimension x="0" y="0"/>
-						</PushedTextOffset>
-					</Button>
-					<Button name="$parentSilverButton" inherits="TitanPanelChildButtonTemplate">
-						<Size>
-							<AbsDimension x="32" y="13"/>
-						</Size>
-						<Anchors>
-							<Anchor point="RIGHT" relativeTo="$parentCopperButton" relativePoint="LEFT">
-								<Offset>
-									<AbsDimension x="-4" y="0"/>
-								</Offset>
-							</Anchor>
-						</Anchors>
-
-						<NormalTexture file="Interface\MoneyFrame\UI-MoneyIcons">
-							<Size>
-								<AbsDimension x="13" y="13"/>
-							</Size>
-							<Anchors>
-								<Anchor point="RIGHT"/>
-							</Anchors>
-							<TexCoords left="0.25" right="0.5" top="0" bottom="1"/>
-						</NormalTexture>
-						<ButtonText name="$parentText" inherits="GameFontHighlightSmall" justifyH="LEFT">
-							<Anchors>
-								<Anchor point="LEFT"/>
-							</Anchors>
-						</ButtonText>
-						<PushedTextOffset>
-							<AbsDimension x="0" y="0"/>
-						</PushedTextOffset>
-					</Button>
-					<Button name="$parentGoldButton" inherits="TitanPanelChildButtonTemplate">
-						<Size>
-							<AbsDimension x="32" y="13"/>
-						</Size>
-						<Anchors>
-							<Anchor point="RIGHT" relativeTo="$parentSilverButton" relativePoint="LEFT">
-								<Offset>
-									<AbsDimension x="-4" y="0"/>
-								</Offset>
-							</Anchor>
-						</Anchors>
-
-						<NormalTexture file="Interface\MoneyFrame\UI-MoneyIcons">
-							<Size>
-								<AbsDimension x="13" y="13"/>
-							</Size>
-							<Anchors>
-								<Anchor point="RIGHT"/>
-							</Anchors>
-							<TexCoords left="0" right="0.25" top="0" bottom="1"/>
-						</NormalTexture>
-						<ButtonText name="$parentText" inherits="GameFontHighlightSmall" justifyH="LEFT">
-							<Anchors>
-								<Anchor point="LEFT"/>
-							</Anchors>
-				 		</ButtonText>
-						<PushedTextOffset>
-							<AbsDimension x="0" y="0"/>
-						</PushedTextOffset>
-					</Button>
-				</Frames>
+			<Button name="TitanPanelCurrencyButton" inherits="TitanPanelComboTemplate" frameStrata="FULLSCREEN" toplevel="true">
 				<Scripts>
 					<OnLoad>
-						SmallMoneyFrame_OnLoad(self);
 						TitanPanelCurrencyButton_OnLoad(self);
 						TitanPanelButton_OnLoad(self);
 					</OnLoad>
 					<OnShow>
 						TitanPanelButton_OnShow(self);
 					</OnShow>
-
 					<OnEvent>
 						TitanPanelCurrencyButton_OnEvent(self, event, ...);
 					</OnEvent>

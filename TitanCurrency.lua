@@ -45,7 +45,7 @@ end
 function TitanPanelCurrencyButton_OnEvent(self, event, ...)
 	if ( event == "PLAYER_ENTERING_WORLD" ) then
 		if (not CURRENCY_INITIALIZED) then
-			MoneyFrame_Update("TitanPanelCurrencyButton", TitanPanelCurrencyButton_FindGold());
+			TitanPanelButton_UpdateButton(TITAN_CURRENCY_ID);
 			CURRENCY_INITIALIZED = true;
 		end
 		return;
@@ -53,10 +53,26 @@ function TitanPanelCurrencyButton_OnEvent(self, event, ...)
 
 	if (event == "PLAYER_MONEY") then
 		if (CURRENCY_INITIALIZED) then
-			MoneyFrame_Update("TitanPanelCurrencyButton", TitanPanelCurrencyButton_FindGold());
+			TitanPanelButton_UpdateButton(TITAN_CURRENCY_ID);
 		end
 		return;
 	end
+end
+
+-- *******************************************************************************************
+-- NAME: TitanPanelCurrencyButton_GetButtonText()
+-- DESC: Generate the text to be displayed on the TitanPanelCurrencyButton
+-- *******************************************************************************************
+function TitanPanelCurrencyButton_GetButtonText(self)
+	-- These are the colors used by the TitanGold addon
+	local gold_color = "|cFFFFFF00"
+	local silver_color = "|cFFCCCCCC"
+	local copper_color = "|cFFFF6600"
+	local money = GetMoney();
+	local gold = BreakUpLargeNumbers(money / 100 / 100)
+	local silver = (money / 100) % 100
+	local copper = money % 100
+	return string.format("%s%sg %s%ds %s%dc", gold_color, gold, silver_color, silver, copper_color, copper);
 end
 
 -- *******************************************************************************************
@@ -80,14 +96,4 @@ function TitanPanelCurrencyButton_GetTooltipText()
 	end
 	final_tooltip=tooltip
 	return ""..final_tooltip;
-end
-
--- *******************************************************************************************
--- NAME: TitanPanelCurrencyButton_FindGold()
--- DESC: This routines determines which gold total the ui wants (server or player) then calls it and returns it
--- *******************************************************************************************
-function TitanPanelCurrencyButton_FindGold()
-	local ttlgold = 0;
-	ttlgold = GetMoney("player");
-	return ttlgold;
 end
