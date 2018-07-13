@@ -12,6 +12,10 @@
 					<OnEvent>
 						TitanPanelCurrencyButton_OnEvent(self, event, ...);
 					</OnEvent>
+					<OnClick>
+						TitanPanelCurrencyButton_OnClick(self, button);
+						TitanPanelButton_OnClick(self, button);
+					</OnClick>
 				</Scripts>
 			</Button>
 		</Frames>

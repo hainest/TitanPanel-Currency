@@ -64,6 +64,21 @@ function TitanPanelCurrencyButton_OnEvent(self, event, ...)
 end
 
 -- *******************************************************************************************
+-- NAME: TitanPanelCurrencyButton_OnClick()
+-- DESC: Mouse click handler for the TitanPanelCurrencyButton
+-- *******************************************************************************************
+function TitanPanelCurrencyButton_OnClick(self, button)
+	if (button == "LeftButton") then
+		-- show the currency tab
+		ToggleCharacter("TokenFrame");
+		return;
+	end
+	if (button == "RightButton") then
+		return;
+	end
+end
+
+-- *******************************************************************************************
 -- NAME: TitanPanelCurrencyButton_GetButtonText()
 -- DESC: Generate the text to be displayed on the TitanPanelCurrencyButton
 -- *******************************************************************************************
