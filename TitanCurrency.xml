@@ -9,19 +9,9 @@
 						TitanPanelCurrencyButton_OnLoad(self);
 						TitanPanelButton_OnLoad(self);
 					</OnLoad>
-					<OnShow>
-						TitanPanelButton_OnShow(self);
-					</OnShow>
 					<OnEvent>
 						TitanPanelCurrencyButton_OnEvent(self, event, ...);
 					</OnEvent>
-					<OnHide>
-						--if ( self.hasPickup == 1 ) then
-						--	CoinPickupFrame:Hide();
-						--	self.hasPickup = 0;
-						--end
-						--TitanPanelCurrencyButton_OnHide();
-					</OnHide>
 				</Scripts>
 			</Button>
 		</Frames>
