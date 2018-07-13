@@ -16,13 +16,4 @@
 			</Button>
 		</Frames>
 	</Frame>
-	<MessageFrame name="TitanPanelCurrency_Detail" insertMode="BOTTOM" parent="UIParent" frameStrata="HIGH" toplevel="true">
-		<Size>
-			<AbsDimension x="512" y="100"/>
-		</Size>
-		<Anchors>
-			<Anchor point="CENTER"/>
-		</Anchors>
-		<FontString inherits="ErrorFont" justifyH="CENTER"/>
-	</MessageFrame>
 </Ui>
