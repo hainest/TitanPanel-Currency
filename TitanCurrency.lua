@@ -47,7 +47,7 @@ function TitanPanelCurrencyButton_OnLoad(self)
 	MoneyFrame_Update("TitanPanelCurrencyButton", TitanPanelCurrencyButton_FindGold());
 end
 
-function TitanCurrency_OnEvent(self, event, ...)
+function TitanPanelCurrencyButton_OnEvent(self, event, ...)
 	if (event == "VARIABLES_LOADED") then
 		CURRENCY_VARIABLES_LOADED = true;
 		if (CURRENCY_ENTERINGWORLD) then

@@ -110,7 +110,7 @@
 					</OnShow>
 
 					<OnEvent>
-						TitanCurrency_OnEvent(self, event, ...);
+						TitanPanelCurrencyButton_OnEvent(self, event, ...);
 					</OnEvent>
 					<OnHide>
 						--if ( self.hasPickup == 1 ) then
