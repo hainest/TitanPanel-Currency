@@ -42,6 +42,10 @@ function TitanPanelCurrencyButton_OnLoad(self)
 	self:RegisterEvent("PLAYER_MONEY");
 end
 
+-- *******************************************************************************************
+-- NAME: TitanPanelCurrencyButton_OnEvent()
+-- DESC: Event handler for the TitanPanelCurrencyButton
+-- *******************************************************************************************
 function TitanPanelCurrencyButton_OnEvent(self, event, ...)
 	if ( event == "PLAYER_ENTERING_WORLD" ) then
 		if (not CURRENCY_INITIALIZED) then
