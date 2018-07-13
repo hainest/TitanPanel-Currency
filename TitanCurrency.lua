@@ -45,7 +45,8 @@ end
 function TitanPanelCurrencyButton_OnEvent(self, event, ...)
 	if ( event == "PLAYER_ENTERING_WORLD" ) then
 		if (not CURRENCY_INITIALIZED) then
-			TitanPanelCurrencyButton_Initialize_Array(self);
+			MoneyFrame_Update("TitanPanelCurrencyButton", TitanPanelCurrencyButton_FindGold());
+			CURRENCY_INITIALIZED = true;
 		end
 		return;
 	end
@@ -89,9 +90,4 @@ function TitanPanelCurrencyButton_FindGold()
 	local ttlgold = 0;
 	ttlgold = GetMoney("player");
 	return ttlgold;
-end
-
-function TitanPanelCurrencyButton_Initialize_Array(self)
-	CURRENCY_INITIALIZED = true;
-	MoneyFrame_Update("TitanPanelCurrencyButton", TitanPanelCurrencyButton_FindGold());
 end
