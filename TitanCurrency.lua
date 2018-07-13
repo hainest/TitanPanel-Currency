@@ -34,12 +34,14 @@ function TitanPanelCurrencyButton_OnLoad(self)
 			DisplayOnRightSide = true
 		},
 		savedVariables = {
-			DisplayOnRightSide = false
+			DisplayOnRightSide = false,
+			SelectedCurrency = {name="gold"}
 		}
 	};
 
 	self:RegisterEvent("PLAYER_ENTERING_WORLD");
 	self:RegisterEvent("PLAYER_MONEY");
+	self:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
 end
 
 -- *******************************************************************************************
@@ -55,11 +57,22 @@ function TitanPanelCurrencyButton_OnEvent(self, event, ...)
 		return;
 	end
 
-	if (event == "PLAYER_MONEY") then
-		if (CURRENCY_INITIALIZED) then
-			TitanPanelButton_UpdateButton(TITAN_CURRENCY_ID);
-		end
+	-- Fired when gold is spent or received
+	if (event == "PLAYER_MONEY") and CURRENCY_INITIALIZED then
+		TitanPanelButton_UpdateButton(TITAN_CURRENCY_ID);
 		return;
+	end
+	
+	-- Fired for all currencies except gold
+	if CURRENCY_INITIALIZED and event == "CURRENCY_DISPLAY_UPDATE" then
+		local cur = TitanGetVar(TITAN_CURRENCY_ID, "SelectedCurrency")
+		if cur.name ~= "gold" then
+			local _, amount = GetCurrencyInfo(cur.link)
+			cur.count = amount
+			TitanSetVar(TITAN_CURRENCY_ID, "SelectedCurrency", cur)
+			TitanPanelButton_UpdateButton(TITAN_CURRENCY_ID)
+		end
+		return
 	end
 end
 
@@ -73,16 +86,56 @@ function TitanPanelCurrencyButton_OnClick(self, button)
 		ToggleCharacter("TokenFrame");
 		return;
 	end
-	if (button == "RightButton") then
-		return;
-	end
+	-- RightButton handler doesn't need to be manually called
+	-- See TitanPanelRightClickMenu_PrepareCurrencyMenu below
 end
 
 -- *******************************************************************************************
--- NAME: TitanPanelCurrencyButton_GetButtonText()
--- DESC: Generate the text to be displayed on the TitanPanelCurrencyButton
+-- NAME: TitanPanelRightClickMenu_PrepareCurrencyMenu()
+-- DESC: Create the right-click menu
+-- NOTE: This naming convention is required by the Titan Panel API (TitanUtils.lua:1498)
 -- *******************************************************************************************
-function TitanPanelCurrencyButton_GetButtonText(self)
+function TitanPanelRightClickMenu_PrepareCurrencyMenu(self)
+	TitanPanelRightClickMenu_AddTitle("Select currency to show")
+	TitanPanelRightClickMenu_AddSpacer()
+
+	-- Gold is considered separately from the other currencies by the Blizzard API
+	local info = L_UIDropDownMenu_CreateInfo()	
+	info.text = "gold"
+	info.menuList = 1
+	info.checked = TitanGetVar(TITAN_CURRENCY_ID, "SelectedCurrency").name == "gold"
+	info.func = function()
+		TitanSetVar(TITAN_CURRENCY_ID, "SelectedCurrency", {name="gold"})
+		TitanPanelButton_UpdateButton(TITAN_CURRENCY_ID)
+	end
+	L_UIDropDownMenu_AddButton(info)
+	
+	local cCount = GetCurrencyListSize()
+	for index=1, cCount do
+		local name, _, _, isUnused, _, count, icon, id = GetCurrencyListInfo(index)
+		if (count ~= 0) and not isUnused then
+			info.text = name
+			info.menuList = index + 1
+			info.checked = name == TitanGetVar(TITAN_CURRENCY_ID, "SelectedCurrency").name
+			info.func = function()
+				TitanSetVar(TITAN_CURRENCY_ID, "SelectedCurrency",
+							{name=name, icon=icon, count=count, link=GetCurrencyListLink(index)})
+				TitanPanelButton_UpdateButton(TITAN_CURRENCY_ID)
+			end
+			L_UIDropDownMenu_AddButton(info)
+		end
+	end
+	
+	TitanPanelRightClickMenu_AddSpacer2()
+
+	local info = L_UIDropDownMenu_CreateInfo()
+	info.text = "Close Menu"
+	info.notCheckable = true
+	info.func = function() L_CloseDropDownMenus() end
+	L_UIDropDownMenu_AddButton(info)
+end
+
+local function get_formatted_gold()
 	-- These are the colors used by the TitanGold addon
 	local gold_color = "|cFFFFFF00"
 	local silver_color = "|cFFCCCCCC"
@@ -91,7 +144,21 @@ function TitanPanelCurrencyButton_GetButtonText(self)
 	local gold = BreakUpLargeNumbers(money / 100 / 100)
 	local silver = (money / 100) % 100
 	local copper = money % 100
-	return string.format("%s%sg %s%ds %s%dc", gold_color, gold, silver_color, silver, copper_color, copper);
+	return string.format("%s%sg %s%ds %s%dc", gold_color, gold, silver_color, silver, copper_color, copper)
+end
+
+-- *******************************************************************************************
+-- NAME: TitanPanelCurrencyButton_GetButtonText()
+-- DESC: Generate the text to be displayed on the TitanPanelCurrencyButton
+-- *******************************************************************************************
+function TitanPanelCurrencyButton_GetButtonText(self)
+	local selected_currency = TitanGetVar(TITAN_CURRENCY_ID, "SelectedCurrency")
+
+	if selected_currency.name == "gold" then
+		return get_formatted_gold()
+	end
+	
+	return "|T"..selected_currency.icon..":16|t "..selected_currency.count.."  "..selected_currency.name;
 end
 
 -- *******************************************************************************************
