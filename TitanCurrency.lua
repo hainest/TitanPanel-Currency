@@ -14,8 +14,6 @@ local TITAN_CURRENCY_VERSION = "5.1";
 
 -- ******************************** Variables *******************************
 local CURRENCY_INITIALIZED = false;
-local CURRENCY_VARIABLES_LOADED = false;
-local CURRENCY_ENTERINGWORLD = false;
 local LB = LibStub("AceLocale-3.0"):GetLocale("Titan_Currency", true)
 -- ******************************** Functions *******************************
 
@@ -42,22 +40,12 @@ function TitanPanelCurrencyButton_OnLoad(self)
 
 	self:RegisterEvent("PLAYER_ENTERING_WORLD");
 	self:RegisterEvent("PLAYER_MONEY");
-	self:RegisterEvent("VARIABLES_LOADED");
 	MoneyFrame_Update("TitanPanelCurrencyButton", TitanPanelCurrencyButton_FindGold());
 end
 
 function TitanPanelCurrencyButton_OnEvent(self, event, ...)
-	if (event == "VARIABLES_LOADED") then
-		CURRENCY_VARIABLES_LOADED = true;
-		if (CURRENCY_ENTERINGWORLD) then
-			TitanPanelCurrencyButton_Initialize_Array(self);
-		end
-		return;
-	end
-
 	if ( event == "PLAYER_ENTERING_WORLD" ) then
-		CURRENCY_ENTERINGWORLD = true;
-		if (CURRENCY_VARIABLES_LOADED) then
+		if (not CURRENCY_INITIALIZED) then
 			TitanPanelCurrencyButton_Initialize_Array(self);
 		end
 		return;
