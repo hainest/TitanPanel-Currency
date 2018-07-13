@@ -40,7 +40,6 @@ function TitanPanelCurrencyButton_OnLoad(self)
 
 	self:RegisterEvent("PLAYER_ENTERING_WORLD");
 	self:RegisterEvent("PLAYER_MONEY");
-	MoneyFrame_Update("TitanPanelCurrencyButton", TitanPanelCurrencyButton_FindGold());
 end
 
 function TitanPanelCurrencyButton_OnEvent(self, event, ...)
