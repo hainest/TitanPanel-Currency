@@ -166,20 +166,14 @@ end
 -- DESC: Gets our tool-tip text, what appears when we hover over our item on the Titan bar.
 -- *******************************************************************************************
 function TitanPanelCurrencyButton_GetTooltipText()
-	local display="";
-	local tooltip="";
-	local name, isHeader, isExpanded, isUnused, isWatched, count, icon, maximum, hasWeeklyLimit, currentWeeklyAmount, unknown;
-	cCount = GetCurrencyListSize();
+	local cCount = GetCurrencyListSize()
+	local tooltip = {}
 	for index=1, cCount do
-		name, isHeader, isExpanded, isUnused, isWatched, count, icon, maximum, hasWeeklyLimit, currentWeeklyAmount, unknown = GetCurrencyListInfo(index)
-		if (count ~= 0) and not isUnused then
-			if icon ~= nil then
-				display=name.."--".."\t"..count.." |T"..icon..":16|t"
-			end
-			tooltip=strconcat(tooltip,display,"|r\n")
+		local name, _, _, isUnused, _, count, icon = GetCurrencyListInfo(index)
+		if count ~= 0 and not isUnused and icon ~= nil then
+			tooltip[#tooltip + 1] = name.."--".."\t"..count.." |T"..icon..":16|t"
 		end
-		myindex=index
 	end
-	final_tooltip=tooltip
-	return ""..final_tooltip;
+	tooltip[#tooltip + 1] = ""
+	return table.concat(tooltip, "|r\n")
 end
