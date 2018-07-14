@@ -174,6 +174,6 @@ function TitanPanelCurrencyButton_GetTooltipText()
 			tooltip[#tooltip + 1] = name.."--".."\t"..count.." |T"..icon..":16|t"
 		end
 	end
-	tooltip[#tooltip + 1] = ""
+	tooltip[#tooltip + 1] = "Gold--\t"..get_formatted_gold()
 	return table.concat(tooltip, "|r\n")
 end
