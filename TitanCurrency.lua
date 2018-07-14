@@ -9,11 +9,11 @@
 -- **************************************************************************
 
 -- ******************************** Constants *******************************
-local TITAN_CURRENCY_ID = "Currency";
-local TITAN_CURRENCY_VERSION = "5.1";
+local TITAN_CURRENCY_ID = "Currency"
+local TITAN_CURRENCY_VERSION = "5.1"
 
 -- ******************************** Variables *******************************
-local CURRENCY_INITIALIZED = false;
+local CURRENCY_INITIALIZED = false
 local LB = LibStub("AceLocale-3.0"):GetLocale("Titan_Currency", true)
 -- ******************************** Functions *******************************
 
@@ -37,10 +37,10 @@ function TitanPanelCurrencyButton_OnLoad(self)
 			DisplayOnRightSide = false,
 			SelectedCurrency = {name="gold"}
 		}
-	};
+	}
 
-	self:RegisterEvent("PLAYER_ENTERING_WORLD");
-	self:RegisterEvent("PLAYER_MONEY");
+	self:RegisterEvent("PLAYER_ENTERING_WORLD")
+	self:RegisterEvent("PLAYER_MONEY")
 	self:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
 end
 
@@ -51,16 +51,16 @@ end
 function TitanPanelCurrencyButton_OnEvent(self, event, ...)
 	if ( event == "PLAYER_ENTERING_WORLD" ) then
 		if (not CURRENCY_INITIALIZED) then
-			TitanPanelButton_UpdateButton(TITAN_CURRENCY_ID);
-			CURRENCY_INITIALIZED = true;
+			TitanPanelButton_UpdateButton(TITAN_CURRENCY_ID)
+			CURRENCY_INITIALIZED = true
 		end
-		return;
+		return
 	end
 
 	-- Fired when gold is spent or received
 	if (event == "PLAYER_MONEY") and CURRENCY_INITIALIZED then
-		TitanPanelButton_UpdateButton(TITAN_CURRENCY_ID);
-		return;
+		TitanPanelButton_UpdateButton(TITAN_CURRENCY_ID)
+		return
 	end
 	
 	-- Fired for all currencies except gold
@@ -83,8 +83,8 @@ end
 function TitanPanelCurrencyButton_OnClick(self, button)
 	if (button == "LeftButton") then
 		-- show the currency tab
-		ToggleCharacter("TokenFrame");
-		return;
+		ToggleCharacter("TokenFrame")
+		return
 	end
 	-- RightButton handler doesn't need to be manually called
 	-- See TitanPanelRightClickMenu_PrepareCurrencyMenu below
@@ -140,7 +140,7 @@ local function get_formatted_gold()
 	local gold_color = "|cFFFFFF00"
 	local silver_color = "|cFFCCCCCC"
 	local copper_color = "|cFFFF6600"
-	local money = GetMoney();
+	local money = GetMoney()
 	local gold = BreakUpLargeNumbers(money / 100 / 100)
 	local silver = (money / 100) % 100
 	local copper = money % 100
@@ -158,7 +158,7 @@ function TitanPanelCurrencyButton_GetButtonText(self)
 		return get_formatted_gold()
 	end
 	
-	return "|T"..selected_currency.icon..":16|t "..selected_currency.count.."  "..selected_currency.name;
+	return "|T"..selected_currency.icon..":16|t "..selected_currency.count.."  "..selected_currency.name
 end
 
 -- *******************************************************************************************
