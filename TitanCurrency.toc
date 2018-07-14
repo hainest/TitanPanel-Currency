@@ -1,7 +1,7 @@
 ## Interface: 70300
-## Title: Titan Panel [|cffeda55fCurrency|r] |cff00aa007.3.5.a|r
+## Title: Titan Panel [|cffeda55fCurrency|r] |cff00aa007.3.6.a|r
 ## Author: Greenhorns@Vek'Nilash
-## Version: 7.3.5.a
+## Version: 7.3.6.a
 ## Notes: This mod displays all active currency on your curent toon in a tooltip.
 ## eMail: greenhorns.veknilash@gmail.com
 ## RequiredDeps: Titan

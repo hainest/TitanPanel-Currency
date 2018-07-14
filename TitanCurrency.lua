@@ -1,5 +1,5 @@
 ﻿-- **************************************************************************
--- * Titan Currency .lua - VERSION 5.4
+-- * Titan Currency .lua - VERSION 7.3
 -- **************************************************************************
 -- * by Greenhorns @ Vek'Nilash
 -- * This mod displays all active currency on your curent toon
@@ -9,7 +9,7 @@
 
 -- ******************************** Constants *******************************
 local TITAN_CURRENCY_ID = "Currency"
-local TITAN_CURRENCY_VERSION = "5.1"
+local TITAN_CURRENCY_VERSION = "7.3"
 
 -- ******************************** Variables *******************************
 local CURRENCY_INITIALIZED = false
