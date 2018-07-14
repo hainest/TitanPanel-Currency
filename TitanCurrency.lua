@@ -2,9 +2,8 @@
 -- * Titan Currency .lua - VERSION 5.4
 -- **************************************************************************
 -- * by Greenhorns @ Vek'Nilash
--- * This mod will display all the Currency you have on the curent toon
--- * in a tool tip.  It shows the curent Toons Gold amount on the Titan Panel
--- * bar.
+-- * This mod displays all active currency on your curent toon
+-- * in a tooltip.
 -- *
 -- **************************************************************************
 
