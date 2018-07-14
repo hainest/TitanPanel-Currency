@@ -135,16 +135,24 @@ function TitanPanelRightClickMenu_PrepareCurrencyMenu(self)
 	L_UIDropDownMenu_AddButton(info)
 end
 
-local function get_formatted_gold()
+local function get_formatted_gold(options)
 	-- These are the colors used by the TitanGold addon
-	local gold_color = "|cFFFFFF00"
-	local silver_color = "|cFFCCCCCC"
-	local copper_color = "|cFFFF6600"
+	local gold_effect = "|cFFFFFF00"
+	local silver_effect = "|cFFCCCCCC"
+	local copper_effect = "|cFFFF6600"
+	
+	if options and options.use_icons then
+		gold_effect = "|TInterface\\MoneyFrame\\UI-GoldIcon:0|t"
+		silver_effect = "|TInterface\\MoneyFrame\\UI-SilverIcon:0|t"
+		copper_effect = "|TInterface\\MoneyFrame\\UI-CopperIcon:0|t"
+	end
+	
 	local money = GetMoney()
 	local gold = BreakUpLargeNumbers(money / 100 / 100)
 	local silver = (money / 100) % 100
 	local copper = money % 100
-	return string.format("%s%sg %s%ds %s%dc", gold_color, gold, silver_color, silver, copper_color, copper)
+	return string.format("%s%sg %s%ds %s%dc", gold_effect, gold,
+						 silver_effect, silver, copper_effect, copper)
 end
 
 -- *******************************************************************************************
@@ -155,7 +163,7 @@ function TitanPanelCurrencyButton_GetButtonText(self)
 	local selected_currency = TitanGetVar(TITAN_CURRENCY_ID, "SelectedCurrency")
 
 	if selected_currency.name == "gold" then
-		return get_formatted_gold()
+		return get_formatted_gold({use_icons=true})
 	end
 	
 	return "|T"..selected_currency.icon..":16|t "..selected_currency.count.."  "..selected_currency.name
