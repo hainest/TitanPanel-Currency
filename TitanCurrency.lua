@@ -48,16 +48,14 @@ end
 -- DESC: Event handler for the TitanPanelCurrencyButton
 -- *******************************************************************************************
 function TitanPanelCurrencyButton_OnEvent(self, event, ...)
-	if ( event == "PLAYER_ENTERING_WORLD" ) then
-		if (not CURRENCY_INITIALIZED) then
-			TitanPanelButton_UpdateButton(TITAN_CURRENCY_ID)
-			CURRENCY_INITIALIZED = true
-		end
+	if (not CURRENCY_INITIALIZED) and event == "PLAYER_ENTERING_WORLD" then
+		TitanPanelButton_UpdateButton(TITAN_CURRENCY_ID)
+		CURRENCY_INITIALIZED = true
 		return
 	end
 
 	-- Fired when gold is spent or received
-	if (event == "PLAYER_MONEY") and CURRENCY_INITIALIZED then
+	if CURRENCY_INITIALIZED and event == "PLAYER_MONEY" then
 		TitanPanelButton_UpdateButton(TITAN_CURRENCY_ID)
 		return
 	end
