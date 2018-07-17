@@ -56,7 +56,10 @@ function TitanPanelCurrencyButton_OnEvent(self, event, ...)
 
 	-- Fired when gold is spent or received
 	if CURRENCY_INITIALIZED and event == "PLAYER_MONEY" then
-		TitanPanelButton_UpdateButton(TITAN_CURRENCY_ID)
+		local cur = TitanGetVar(TITAN_CURRENCY_ID, "SelectedCurrency")
+		if cur.name == "gold" then
+			TitanPanelButton_UpdateButton(TITAN_CURRENCY_ID)
+		end
 		return
 	end
 	
